@@ -1,0 +1,109 @@
+Ce dossier contient  les fichiers suivants :
+
+
+___________________________________________________________________________________________________________________________________
+hashtable.h et hashtable.c
+##########################
+   Le header (.h) et le fichier (.c) est l'implementation des hash tables (dictionnaires) proprement dite , ils contient les fonctions
+nécessaires pour manipuler les hash table. La formulation faite ici se contente de representer un hash table par un tableau de listes 
+chainees <**table> de taille fixe <size>.
+
+Les fonctions utilises:
+ Une structure <entry> : c'est une liste chainees de couples (clé,valeur)
+ Une structure <hashtable> ; c'est un couple d'un entier <size> et un tableau des <entry> de taille <size> 
+
+hashtable *create_hashtable (int size)                   //fonction permettant de creer un <hashtable> etant donne sa taille <size>
+int        hash (char *key )                             // fonction qui retourne le hash d'une chaine de caracteres <key>
+entry     *create_entry ( char *key, char *value )       // fonction pour creer une <entry> etant donne le couple (<key>,<value>)
+void       insert_pair ( hashtable *hash_table, char *key, char *value ) // inserer un couple (<key>,<value> dans le <hash_table>
+char      *get_value (hashtable *hash_table, char *key)   // retourner la valeur <value> pour une cle <key> dans le <hash_table>
+int        delate_key (hashtable *hash_table,  char *key) // supprimer un couple (<key>,-) de <hash_table> etant donne <key>
+void       free_hashtable(hashtable *hash_table);         // liberer la memoire 
+void       print_hashtable(hashtable *hash_table);        // afficher <hash_table>
+
+
+
+___________________________________________________________________________________________________________________________________
+test.h et test.c
+########################
+   Ces deux fichiers regroupe les fonctions necessaires pour effectuer les tests sur les hash table :Une fonction qui compte le nombre
+de collisions par exemple ...
+
+Les fonctions utilises:
+void number_collision_update(int h,int *collisions)  // Met a jour la table de <*collisions> lorsqu'on insere une cle de hash <h>
+int max_collisions (int *collision,int len)          // Le nombre maximum de collisions dans la table <collisions> de taille <len>
+void rand_str(char *dest, int length)                // genere une chaine de caractere <*dest> aleatoire de longueur <length> 
+int* get_time()                                      // retourn le couple ( nombre de seconde, nombre de nanos) avec un origine fixe
+
+
+
+
+
+___________________________________________________________________________________________________________________________________
+test_simple. c
+########################
+   Ce fichier est un simple test pour verifier que les fonctions implementer repondent bien au besion : on cree un hash table et on 
+insere des elements dedans on les affiche , on ajoute d'autre elements , on supprime quelques uns , on test la fonction free .
+1) Methode d'execution , tapez les commandes suivantes dans le present dossier :
+$ make all
+$ ./test_simple.exe
+
+
+2)Modifictions possibles pour raffiner le test (dans la tete du fichier) :
+
+#define NUMBER_KEYS 8                                                    // le nombre de cles vous pouvez le changer
+#define KEYS "key1","key2","key3","key4","key5","key6","key7","key8"     // les cles
+#define VALUES "12","15","20","18","16","17","13","15"                   // les valeurs correspondantes par ordre
+
+ Attiontion : chaque modification doit respecter NUMBER_KEYS= le nombre des cles =le nombre de valeurs
+
+______________________________________________________________________________________________________________________________
+test_advanced.c
+########################
+   Ce fichier est un test pour voir les limites du modele retenue on test pour plusieurs valeurs de nombres cles et pour des <size> 
+differentes le nombre de collisions et la nombre de cases utilisees dans la <table> d'un hash table, on genere un grand nombre de 
+cles aleatoirement et on regarde les variations des parametres soulignees :
+
+1) Methode d'execution , tapez les commandes suivantes dans le present dossier :
+$ make all                                      (* une seule fois suffit *)
+$ ./test_advanced.exe
+
+Vous aurrez un tableau comme :
+
+############################# The insertion test SIZE= 100 ######################################
+
+N. of insertions          N. of hash used        max N. of collisions     Memory used     SIZE of hash_table
+
+
+SIZE                 : est le taille du hash_table (l'affichage sera pour plusieurs tailles)
+N. of insertions     : le nombre des insertion dans le hash_table
+N. of hash used      : le des cases utilises dans la table <hash_table->size> , le nombre de hash qui ont ete utilises
+max N. of collisions : le nombre maximum des collisions (la longueur de la liste chaine la plus longue)
+Memory used          : le pourcentage des elements utilises dans le tableau <**table> de taille <size> declare.
+SIZE of hash_table   : la taille du hash table
+
+
+2)Modification possible pour raffiner le test :
+
+#define N_LINES 30                       // le nombre de lignes a afficher dans le tableau
+#define SIZES   20,100,1000              // les tests seront faites sur ces defferentes <SIZE>
+#define N_KEYS  100,500,5000             // le nombre de cle maximum a inserer pour chaque <SIZE>
+
+
+___________________________________________________________________________________________________________________________________
+test_time.c
+########################
+   Ce fichier est un test pour voir le temps necessairs pour l'insertion  et la recherche d'une valeurs dans un hash table pour 
+differents valeurs de nombre de clé dans le hash table et la taille de hash table ( ce test necessite des grandes valeurs ).
+
+1) Methode d'execution , tapez les commandes suivantes dans le present dossier :
+$ make all                                      (* une seule fois suffit *)
+$ ./test_time.exe
+
+2) Modification possible
+
+#define N_LINES 30
+#define SIZES   20,100,1000
+#define N_KEYS  1000,10000,100000
+
+

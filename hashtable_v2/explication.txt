@@ -1,0 +1,44 @@
+Ce dossier contient  les fichiers suivants :
+
+
+___________________________________________________________________________________________________________________________________
+hashtable.h et hashtable.c
+##########################
+   Le header (.h) et le fichier (.c) est la nouvelle implementation des hash tables (dictionnaires). Dans le premiere version la
+taille <size> est fixe , la deuxieme version permet de faire une redimentionnement des hash_table lors de creation et de 
+l'insertion : En fait , chaque fois qu'on cree un hash_table vide son <size> est automatiquement = 8 , et lors de l'insertion
+si le nombre de cases remplis est superieur a 2/3 la taille du hash_table on muliplie la dimention du tableau par 2 .
+
+Les nouvelles fonctions utilises:
+hashtable *new_hashtable ()    // permet de creer un hash_table de <size>=8
+hashtable *resize_hashtable(hashtable *hash_table);  // redimentioner un <hash_table>
+int        cases_full(hashtable *hash_table);        // le nombre de cases remplis dans le <hash_table>
+void       insert_resize_pair( hashtable **hash_table, char *key, char *value ); // inserer un nouvel couple (<key>,<value>)
+							// dans <hash_table> en tenant compte de contrainte de modification. 
+
+
+
+___________________________________________________________________________________________________________________________________
+test.h et test.c
+########################
+   Ausune modification
+
+___________________________________________________________________________________________________________________________________
+test_simple. c
+########################
+   petites modifications pour manipuler le nouveau modele
+
+______________________________________________________________________________________________________________________________
+test_advanced.c
+########################
+   petites modifications pour manipuler le nouveau modele
+
+___________________________________________________________________________________________________________________________________
+test_time.c
+########################
+   petites modifications pour manipuler le nouveau modele
+
+
+
+
+
